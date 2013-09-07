@@ -1,13 +1,13 @@
 package main
 
 import (
-    bf "github.com/johnernaut/battlefury"
+    "github.com/johnernaut/battlefury/router"
     "log"
     "net/http"
 )
 
 func main() {
-    r, err := bf.BuildRoutes()
+    r, err := router.BuildRoutes()
 
     if err != nil {
         log.Panic(err)

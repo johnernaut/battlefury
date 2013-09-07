@@ -1,4 +1,4 @@
-package battlefury
+package router
 
 import (
     "fmt"

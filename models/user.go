@@ -11,7 +11,7 @@ type User struct {
     Email string `json:"email"`
 }
 
-func (u User) Find() string {
+func (u User) All() []byte {
     var username string
     var email string
     var users []User
@@ -34,7 +34,26 @@ func (u User) Find() string {
         log.Panic(err)
     }
 
-    return string(data)
+    return data
+}
+
+func (u User) Find(id string) []byte {
+    var user = &User{}
+
+    row := db.Connection.Db.QueryRow("select username, email from users where id = ?", id)
+    err := row.Scan(&user.Username, &user.Email)
+
+    if err != nil {
+        log.Panic(err)
+    }
+
+    data, err := json.Marshal(user)
+
+    if err != nil {
+        log.Panic(err)
+    }
+    
+    return data
 }
 
 func init() {

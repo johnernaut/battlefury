@@ -11,11 +11,8 @@ type connection struct {
 }
 
 type Model interface {
-    Find() string
-}
-
-func Find(m Model) string {
-    return m.Find()
+    All() []byte
+    Find(string) []byte
 }
 
 var Connection = new(connection)

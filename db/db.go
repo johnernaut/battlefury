@@ -10,7 +10,20 @@ type connection struct {
     Db *sql.DB
 }
 
+type Model interface {
+    Find() string
+}
+
+func Find(m Model) string {
+    return m.Find()
+}
+
 var Connection = new(connection)
+var Models = []Model{}
+
+func Register(m Model) {
+    Models = append(Models, m)
+}
 
 func Connect() {
     db, err := sql.Open("mysql", "root:@/go_development")

@@ -4,7 +4,8 @@ import (
 	"fmt"
 	"github.com/gorilla/mux"
 	"github.com/johnernaut/battlefury/models"
-    "encoding/json"
+	"github.com/johnernaut/battlefury/db"
+    _ "encoding/json"
 	"net/http"
 )
 
@@ -17,12 +18,8 @@ func BuildRoutes() (*mux.Router, error) {
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
-    people := models.Find()
-    data, err := json.Marshal(people)
+    user := &models.User{}
+    people := db.Find(user)
 
-    if err != nil {
-        panic(err)
-    }
-
-    fmt.Fprint(w, string(data))
+    fmt.Fprint(w, people)
 }

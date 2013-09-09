@@ -3,6 +3,7 @@ package models
 import (
     "log"
 	"github.com/johnernaut/battlefury/db"
+    "encoding/json"
 )
 
 type User struct {
@@ -10,7 +11,7 @@ type User struct {
     Email string `json:"email"`
 }
 
-func Find() []User {
+func (u User) Find() string {
     var username string
     var email string
     var users []User
@@ -27,9 +28,15 @@ func Find() []User {
         users = append(users, user)
     }
 
+    data, err := json.Marshal(users)
+
     if err != nil {
         log.Panic(err)
     }
 
-    return users
+    return string(data)
+}
+
+func init() {
+    db.Register(&User{})
 }

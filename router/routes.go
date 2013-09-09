@@ -3,6 +3,8 @@ package router
 import (
 	"fmt"
 	"github.com/gorilla/mux"
+	"github.com/johnernaut/battlefury/models"
+    "encoding/json"
 	"net/http"
 )
 
@@ -15,5 +17,12 @@ func BuildRoutes() (*mux.Router, error) {
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "I love %s!", r.URL.Path[1:])
+    people := models.Find()
+    data, err := json.Marshal(people)
+
+    if err != nil {
+        panic(err)
+    }
+
+    fmt.Fprint(w, string(data))
 }

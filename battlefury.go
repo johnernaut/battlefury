@@ -1,12 +1,14 @@
 package main
 
 import (
+	"github.com/johnernaut/battlefury/db"
 	"github.com/johnernaut/battlefury/router"
 	"log"
 	"net/http"
 )
 
 func main() {
+    db.Connect()
 	r, err := router.BuildRoutes()
 
 	if err != nil {

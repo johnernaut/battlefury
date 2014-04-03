@@ -1,5 +1,5 @@
 pre_build: echo build up
-build: go build .
+build: go get && go build
 post_build: ls
 deploy_branch: master
 deploy_script: prod_deploy.rb

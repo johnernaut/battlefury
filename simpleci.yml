@@ -1,3 +1,4 @@
+language: go
 pre_build: echo build up
 build: go get && go build
 post_build: ls
